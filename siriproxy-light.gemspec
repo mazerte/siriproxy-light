@@ -7,6 +7,8 @@ Gem::Specification.new do |s|
   s.authors     = ["mazerte"]
   s.email       = ["mathieu.desve@me.com"]
   s.homepage    = "https://github.com/mazerte/"
+  s.summary     = %q{A Light plugin for SiriProxy that controls a light on my home}
+  s.description = %q{This is largely a demo plugin of a real-world implementation of SiriProxy}
 
   s.rubyforge_project = "siriproxy-light"
 
