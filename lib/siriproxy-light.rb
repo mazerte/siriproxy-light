@@ -24,7 +24,7 @@ class SiriProxy::Plugin::Light < SiriProxy::Plugin
       led = "red"
     end
     
-    page = HTTParty.get("http://rpi.hime/push?led=#{led}&state=#{state}").body rescue nil
+    page = HTTParty.get("http://rpi.home:1313/push?led=#{led}&state=#{state}").body rescue nil
     say "J'ai #{result} la lampe #{color}"
   end
   
