@@ -7,7 +7,7 @@ class SiriProxy::Plugin::Light < SiriProxy::Plugin
     @config = config 
   end
 
-  listen_for /(allume|éteins) la lampe (.+)/i do |action, color|
+  listen_for /(allume|éteins) la lampe (\w+)/i do |action, color|
     case action
     when "allume"
       result = "allumé"
@@ -24,8 +24,11 @@ class SiriProxy::Plugin::Light < SiriProxy::Plugin
       led = "red"
     end
     
-    page = HTTParty.get("http://rpi.home:1313/push?led=#{led}&state=#{state}").body rescue nil
-    say "J'ai #{result} la lampe #{color}", spoken: "http://rpi.home:1313/push?led=#{led}&state=#{state}"
+    Thread.new {
+      page = HTTParty.get("http://rpi.home:1313/push?led=#{led}&state=#{state}").body rescue nil
+      say "J'ai #{result} la lampe #{color}"
+      request_completed
+    }
   end
   
 end
